@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">SqlDelightExample</string>
+    <string name="delete_note">delete note</string>
+    <string name="title_activity_note_detail">NoteDetail</string>
+    <string name="add_note">add note</string>
+    <string name="title">set a title</string>
+    <string name="save_note">save note</string>
+    <string name="go_back">go back</string>
+    <string name="content">Content</string>
 </resources>
