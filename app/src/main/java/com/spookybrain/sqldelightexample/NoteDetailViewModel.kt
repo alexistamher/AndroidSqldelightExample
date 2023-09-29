@@ -2,16 +2,12 @@ package com.spookybrain.sqldelightexample
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import java.util.Date
+import javax.inject.Inject
 
-class NoteDetailViewModel(
-    private val repository: NoteRepository = NoteRepository()
-) : ViewModel() {
-    private val dispatcher = CoroutineScope(Dispatchers.IO)
+class NoteDetailViewModel @Inject constructor(
+    private val repository: NoteRepository
+) {
     private var noteId: Long? = null
     var title: String = ""
         private set
@@ -23,20 +19,16 @@ class NoteDetailViewModel(
         get() = _validForm
 
     fun getNoteById(id: Long) {
-        dispatcher.launch {
-            repository.getNoteById(id)?.let { note ->
-                noteId = note.id
-                title = note.title
-                content = note.content
-            }
+        repository.getNoteById(id)?.let { note ->
+            noteId = note.id
+            title = note.title
+            content = note.content
         }
     }
 
     fun insertNote() {
         val note = Note(noteId, title, content, Date().time)
-        dispatcher.launch {
-            repository.insertNote(note)
-        }
+        repository.insertNote(note)
     }
 
     fun setTitle(current: String) {

@@ -2,9 +2,10 @@ package com.spookybrain.sqldelightexample
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import javax.inject.Inject
 
-class MainViewModel(
-    private val repository: NoteRepository = NoteRepository()
+class MainViewModel @Inject constructor(
+    private val repository: NoteRepository
 ) {
     private val _state: MutableLiveData<List<Note>> = MutableLiveData(emptyList())
     val state: LiveData<List<Note>>
