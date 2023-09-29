@@ -6,13 +6,15 @@ import android.widget.ImageButton
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import com.google.android.material.textfield.TextInputEditText
+import javax.inject.Inject
 
 class NoteDetailActivity : AppCompatActivity() {
     companion object {
         const val EXTRA_NOTE_ID = "NOTE_ID"
     }
 
-    private val viewModel = NoteDetailViewModel()
+    @Inject
+    lateinit var viewModel: NoteDetailViewModel
 
     private lateinit var ibGoBack: ImageButton
     private lateinit var ibSave: ImageButton
@@ -20,6 +22,7 @@ class NoteDetailActivity : AppCompatActivity() {
     private lateinit var tvContent: TextInputEditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        (application as NoteApp).appComponent.inject(this)
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_note_detail)
